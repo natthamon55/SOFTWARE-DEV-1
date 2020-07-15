@@ -4,8 +4,11 @@
 # In[ ]:
 ###student_id:6201012620139
 ###assignment1
-import pygame 
-import random
+### ref1:  https://stackoverflow.com/questions/58717367/how-does-the-collidepoint-function-in-pygame-work
+### ref2:  https://stackoverflow.com/questions/28999287/generate-random-colors-rgb
+import pygame
+from random import randint
+from random import choice
 
 black = 0,0,0
 white = 255,255,255
@@ -20,12 +23,13 @@ clock = pygame.time.Clock()
 #set up screen
 scr_w, scr_h = 800, 600
 screen  = pygame.display.set_mode((scr_w, scr_h))
-
+# create a new surface 
+surface = pygame.Surface( screen.get_size(), pygame.SRCALPHA )
 #list of info
-cir_cle = []
-Name = []
-radius = []
-#random color rbg
+Name = [ ]
+cir_cle = [ ]
+rad = [ ]
+#random color
 COLORS = [(119, 141, 252), 
           (119, 252, 181),
           (252, 243, 119),
@@ -33,76 +37,74 @@ COLORS = [(119, 141, 252),
           (253,170,115)]
 
 def random_color():
-    return random.choice(COLORS)
+    return choice(COLORS)
 
-#make n=10 circles
-def draw_circle():
-    for n in range(10):
-        r = random.randint(10,20) #random radius 10-20 
-        x = random.randint(r,scr_w-r) #random x position
-        y = random.randint(r,scr_h-r) #random y position
-        color= random_color() #random color
-        draw_cir=pygame.draw.circle( screen, color, (x,y), r ,0) #make circle
-
-        #add info
-        Name.append(draw_cir)
+# make 10 circles
+def draw_Circle():
+    for num in range(10):
+        r = randint(10,20) #random radius 10-20
+        x = randint(r,scr_w-r) #random x position
+        y = randint(r,scr_h-r) #random y position
+        
+        draw = pygame.draw.circle(screen, random_color(), (x,y), r ,0)
+        # add info to list
+        Name.append(draw)
         cir_cle.append((x,y,r))
-        radius.append(r)
+        rad.append(r)
+    return True
 
-    return 0
-
-# delete the most radius of circles
+# remove the biggest radius of circle
 def get_cir_rm():
-    max_r = max(radius)
+    max_r = max(rad) #max value of radius
     for x,y,r in cir_cle :
         if r == max_r: 
-            c = cir_cle[cir_place.index((x,y,r))]   # Let c = circle with the most radius
-            index = cir_place.index((x,y,r))          # find index of circle with the most radius
-            circle = Name[index]                      # Let circle = val of  circle 
-            print("The biggest circle is ", circle)
+            c = cir_cle[cir_cle.index((x,y,r))]   # Let c = circle with the most radius
+            index = cir_cle.index((x,y,r))          # find index of circle with the most radius
+            circle = Name[index]                      # Let circle = draw of  circle 
+            print('The Biggest circle is :{}'.format(circle))
             return circle
-
 # get the most radius
-def get_r_rm():
-    max_r = max(radius)
+def get_max_r():
+    max_r = max(rad)
     for x,y,r in cir_cle :
         if r == max_r: 
-            return r 
+            return r
 
-
-def rm_data():
-    circle = get_cir_rm()                     # circle = วงกลมที่จะลบ
+def  rm_info():
+    circle = get_cir_rm()                     # circle that want to remove
     index = Name.index(circle)                # fin dindex of data about circle
     Name.remove(Name[index])                  # Remove val from Name
     cir_cle.remove(cir_cle[index])        # Remove position from cir_place
-    radius.remove(radius[index])              # Remove radius from radius
+    rad.remove(rad[index])              # Remove radius from radius
     return 0    
 
-#do circle
-draw_circle()
+# Draw circle
+draw_Circle()
 
-# Run until the user asks to quit
 running = True
-while running:
 
-    clock.tick( 10 ) 
+while running :
 
-    # Did the user click the window close button?
-    for event in pygame.event.get():
+    clock.tick(10)
+
+    event_get=pygame.event.get()
+
+    #when user click close button
+    for event in event_get  :
         if event.type == pygame.QUIT:
             running = False
-        
-        
-    for event in pygame.event.get():
-            if ( event.type == pygame.MOUSEBUTTONUP ):         
-                mouse_pos = pygame.mouse.get_pos()             
-                circle_remove = get_cir_rm()                   
-                r = get_r_rm()
-                if ( circle_remove.collidepoint( mouse_pos ) ):   
-                    pygame.draw.circle(screen, black, mouse_pos, r*2 ,0)    
-                    rm_data()                                  
+
+    for event in event_get :
+        if ( event.type == pygame.MOUSEBUTTONUP ):         # click left mouse 
+            mouse_pos = pygame.mouse.get_pos()             # Location of the mouse-click
+            circle_remove = get_cir_rm()                   # Select circle to remove 
+            r = get_max_r()
+            if ( circle_remove.collidepoint( mouse_pos ) ):   # click circle 
+                pygame.draw.circle(screen, black, mouse_pos, r*3 ,0)    # Draw another circle over selected circle 
+                rm_info()   #delete circle from list
     
     # update the screen display
     pygame.display.update()
 
 pygame.quit()
+
