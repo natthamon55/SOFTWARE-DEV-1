@@ -27,14 +27,15 @@ def main_menu() :
         button , values = window.read()
         if button == "START" :
             game()
+            window.close()
 
         if button == "HOW TO PLAY ?" :
             sg.popup('Touch/Click the ball through the camera , When you tap it there will show your score with coundown timer :P')
 
         if button == sg.WIN_CLOSED :
             break
+            window.close()
 
-    window.close()
 
 def game():
     layout =[
@@ -50,6 +51,7 @@ def game():
 
         if button == sg.WIN_CLOSED :
             break
+            window.close()
 
         if button == 'TIME :'  :
             seconds = 5
@@ -65,10 +67,6 @@ def game():
                 if timeleft == 0:
                     sg.popup("TIME UP!")
                     score()
-
-
-    window.close()
-
 
 
 def score() :
@@ -87,11 +85,12 @@ def score() :
         button , values = window.read()
         if button == "RESTART" :
             main_menu()
+            window.close()
 
         if button == sg.WIN_CLOSED :
             break
+            window.close()
 
-    window.close()
 
 main_menu()
 
