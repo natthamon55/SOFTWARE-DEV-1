@@ -2,7 +2,7 @@
 ## Blog : https://one-touch-game-project.blogspot.com/p/one-touch.html
 ## USE PYGAME & PYSIMPLE GUI
 ### student id :
-### 1)นางสาวหทัยพัชร ชำนินวล 6201012620244
+### 1)นางสาวหทัยพัชร ชำนินวล 6201012620244 Github : https://github.com/hathaipat-p/
 ### 2) นางสาวนัทธมน บุญนิธิ 6201012620139
 
 #### Haarcascades for face detection : https://github.com/opencv/opencv/tree/master/data/haarcascades
