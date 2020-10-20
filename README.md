@@ -1,2 +1,4 @@
 # 010123131  Software Development Practice I
-## Teacher RAWAT SIRIPOKARPIROM
+## PROFESSOR : RAWAT SIRIPOKARPIROM
+## Name : Natthamon Bunnithi
+## student id : 6201012620139
