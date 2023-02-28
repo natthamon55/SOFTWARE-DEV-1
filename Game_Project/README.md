@@ -1,4 +1,5 @@
 # Game Project : ONE TOUCH
+# A game that uses the face to detect the ball through camera
 ## Blog : https://one-touch-game-project.blogspot.com/p/one-touch.html
 ## Youtube : https://youtu.be/M9ZK3cvVFu0
 ## USE PYGAME & PYSIMPLE GUI
